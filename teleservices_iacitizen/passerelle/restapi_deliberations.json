@@ -22,8 +22,8 @@
       "password": "PASSWORD",
       "queries": [
         {
-          "name": "QUERY_NAME",
-          "slug": "QUERY_SLUG",
+          "name": "Délibérations",
+          "slug": "deliberations",
           "description": "Soyez inform\u00e9s d\u00e8s que les d\u00e9cisions publiques du Conseil communal auront \u00e9t\u00e9 approuv\u00e9es par ses membres.",
           "uri": "QUERIES_URI",
           "text_template": "{{ title }}",
