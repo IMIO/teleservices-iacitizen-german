@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
-<formdef id="323" url="https://demo-formulaires.guichet-citoyen.be/backoffice/forms/323/">
-  <name>Actualit&#233;</name>
-  <url_name>actualite</url_name>
+<formdef id="292" url="https://staging-formulaires.guichet-citoyen.be/backoffice/forms/292/">
+  <name>News einreichen</name>
+  <url_name>news-einreichen</url_name>
   <discussion>false</discussion>
   <detailed_emails>true</detailed_emails>
   <disabled>false</disabled>
@@ -12,45 +12,30 @@
   <include_download_all_button>false</include_download_all_button>
   <has_captcha>false</has_captcha>
   <skip_from_360_view>false</skip_from_360_view>
-  <category slug="publications" category_id="149">Publications</category>
-  <workflow slug="contributions" workflow_id="168">iA.Citizen - Publications (actualit&#233;s, &#233;v&#233;nements, fiches annuaires)</workflow>
-  <max_field_id>25</max_field_id>
+  <category slug="contributions" category_id="130">Publications</category>
+  <workflow slug="iacitizen-veroffentlichungen-news-veranstaltungen-adressenverzeichnis" workflow_id="182">iA.Citizen - Ver&#246;ffentlichungen (News, Veranstaltungen, Adressenverzeichnis)</workflow>
   <fields>
     <field>
-      <label type="str">Soumettre une actualit&#233;</label>
-      <type type="str">page</type>
+      <type>page</type>
+      <label type="str">News einreichen</label>
       <id type="str">18</id>
     </field><field>
-      <label type="str">Soumettre une actualit&#233;</label>
-      <type type="str">title</type>
-      <display_locations>
-        <display_location>validation</display_location>
-        <display_location>summary</display_location>
-      </display_locations><id type="str">24</id>
-    </field><field>
-      <label type="str">Votre actualit&#233;</label>
-      <type type="str">subtitle</type>
-      <display_locations>
-        <display_location>validation</display_location>
-        <display_location>summary</display_location>
-      </display_locations><id type="str">25</id>
-    </field><field>
-      <label type="str">Titre</label>
-      <type type="str">string</type>
+      <type>string</type>
+      <label type="str">Titel</label>
       <required type="bool">True</required>
-      <hint type="str">Titre principal de votre actualit&#233;.</hint>
+      <hint type="str">Haupttitel Ihrer News</hint>
       <varname type="str">titre</varname>
       <display_locations>
         <display_location>validation</display_location>
         <display_location>summary</display_location>
       </display_locations><extra_css_class type="str">grid-1-1</extra_css_class>
-      <anonymise type="bool">True</anonymise>
+      <anonymise type="str">final</anonymise>
       <id type="str">1</id>
     </field><field>
-      <label type="str">Courte description</label>
-      <type type="str">text</type>
-      <required type="bool">True</required>
-      <hint type="str">R&#233;sum&#233; de l'actualit&#233; en quelques phrases et en 700 caract&#232;res, maximum.</hint>
+      <type>text</type>
+      <label type="str">Kurze Beschreibung</label>
+      <required type="bool">False</required>
+      <hint type="str">Zusammenfassung der Nachricht in einigen S&#228;tzen (maximal 700 Zeichen).</hint>
       <varname type="str">description</varname>
       <display_locations>
         <display_location>validation</display_location>
@@ -58,25 +43,25 @@
       </display_locations><extra_css_class type="str">grid-1-1</extra_css_class>
       <display_mode type="str">plain</display_mode>
       <maxlength type="str">700</maxlength>
-      <anonymise type="bool">True</anonymise>
+      <anonymise type="str">final</anonymise>
       <id type="str">2</id>
     </field><field>
-      <label type="str">Texte de pr&#233;sentation</label>
-      <type type="str">text</type>
-      <required type="bool">True</required>
-      <hint type="str">Contenu descriptif et plus dense que la courte description.</hint>
+      <type>text</type>
+      <label type="str">Pr&#228;sentationstext</label>
+      <required type="bool">False</required>
+      <hint type="str">Beschreibender Inhalt.</hint>
       <varname type="str">texte</varname>
       <display_locations>
         <display_location>validation</display_location>
         <display_location>summary</display_location>
       </display_locations><display_mode type="str">plain</display_mode>
-      <anonymise type="bool">True</anonymise>
+      <anonymise type="str">final</anonymise>
       <id type="str">23</id>
     </field><field>
-      <label type="str">Vid&#233;o</label>
-      <type type="str">string</type>
+      <type>string</type>
+      <label type="str">Video</label>
       <required type="bool">False</required>
-      <hint type="str">Lien vers une vid&#233;o YouTube ou Vimeo (optionnel).</hint>
+      <hint type="str">Link zu einem YouTube- oder Vimeo-Video (optional).</hint>
       <varname type="str">video</varname>
       <display_locations>
         <display_location>validation</display_location>
@@ -86,13 +71,13 @@
         <error_message>Veuillez saisir une URL (https://...)</error_message>
         <type>regex</type>
         <value>http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&amp;+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+</value>
-      </validation><anonymise type="bool">True</anonymise>
+      </validation><anonymise type="str">final</anonymise>
       <id type="str">3</id>
     </field><field>
-      <label type="str">Site internet</label>
-      <type type="str">string</type>
+      <type>string</type>
+      <label type="str">Website</label>
       <required type="bool">False</required>
-      <hint type="str">Liens d'un site pour l'actualit&#233; (optionnel).</hint>
+      <hint type="str">Links von einer Website f&#252;r diese News (optional).</hint>
       <varname type="str">site_internet</varname>
       <display_locations>
         <display_location>validation</display_location>
@@ -101,17 +86,18 @@
       <prefill>
         <locked>False</locked>
         <type>string</type>
+        <value>https://</value>
       </prefill><validation>
         <error_message>Veuillez saisir une URL (https://...)</error_message>
         <type>regex</type>
         <value>http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&amp;+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+</value>
-      </validation><anonymise type="bool">True</anonymise>
+      </validation><anonymise type="str">final</anonymise>
       <id type="str">4</id>
     </field><field>
+      <type>string</type>
       <label type="str">Facebook</label>
-      <type type="str">string</type>
       <required type="bool">False</required>
-      <hint type="str">Lien Facebook pour cette actualit&#233; (optionnel).</hint>
+      <hint type="str">Facebook-Link f&#252;r diese News (optional).</hint>
       <varname type="str">facebook</varname>
       <display_locations>
         <display_location>validation</display_location>
@@ -121,13 +107,13 @@
         <error_message>Veuillez saisir une URL (https://...)</error_message>
         <type>regex</type>
         <value>http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&amp;+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+</value>
-      </validation><anonymise type="bool">True</anonymise>
+      </validation><anonymise type="str">final</anonymise>
       <id type="str">5</id>
     </field><field>
+      <type>string</type>
       <label type="str">Twitter</label>
-      <type type="str">string</type>
       <required type="bool">False</required>
-      <hint type="str">Lien Twitter pour cette actualit&#233; (optionnel).</hint>
+      <hint type="str">Twitter-Link f&#252;r diese News (optional).</hint>
       <varname type="str">twitter</varname>
       <display_locations>
         <display_location>validation</display_location>
@@ -137,13 +123,13 @@
         <error_message>Veuillez saisir une URL (https://...)</error_message>
         <type>regex</type>
         <value>http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&amp;+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+</value>
-      </validation><anonymise type="bool">True</anonymise>
+      </validation><anonymise type="str">final</anonymise>
       <id type="str">6</id>
     </field><field>
+      <type>string</type>
       <label type="str">Instagram</label>
-      <type type="str">string</type>
       <required type="bool">False</required>
-      <hint type="str">Lien Instagram pour cette actualit&#233; (optionnel).</hint>
+      <hint type="str">Instagram-Link f&#252;r diese News (optional).</hint>
       <varname type="str">instagram</varname>
       <display_locations>
         <display_location>validation</display_location>
@@ -153,13 +139,13 @@
         <error_message>Veuillez saisir une URL (https://...)</error_message>
         <type>regex</type>
         <value>http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&amp;+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+</value>
-      </validation><anonymise type="bool">True</anonymise>
+      </validation><anonymise type="str">final</anonymise>
       <id type="str">7</id>
     </field><field>
-      <label type="str">Image principale sans texte</label>
-      <type type="str">file</type>
+      <type>file</type>
+      <label type="str">Hauptbild ohne Text</label>
       <required type="bool">True</required>
-      <hint type="str">Les images comportant du texte ne sont pas visibles dans leur enti&#232;ret&#233;.</hint>
+      <hint type="str">Bilder mit Text sind nicht in ihrer Gesamtheit sichtbar.</hint>
       <varname type="str">image</varname>
       <display_locations>
         <display_location>validation</display_location>
@@ -175,10 +161,10 @@
       <storage type="str">default</storage>
       <id type="str">8</id>
     </field><field>
-      <label type="str">Th&#233;matiques</label>
-      <type type="str">items</type>
-      <required type="bool">False</required>
-      <hint type="str">Cochez une ou plusieurs th&#233;matiques pour cette actualit&#233; (optionnel).</hint>
+      <type>items</type>
+      <label type="str">Themen</label>
+      <required type="bool">True</required>
+      <hint type="str">Kreuzen Sie ein oder mehrere Themen f&#252;r diese News an (optional).</hint>
       <varname type="str">thematiques</varname>
       <display_locations>
         <display_location>validation</display_location>
@@ -191,14 +177,16 @@
         <type>json</type>
         <value>{{ passerelle_url }}plone-restapi/actualites/get_field_choices?id=imio.smartweb.vocabulary.Topics</value>
       </data_source><in_filters type="bool">False</in_filters>
-      <anonymise type="bool">True</anonymise>
+      <anonymise type="str">final</anonymise>
       <display_disabled_items type="bool">False</display_disabled_items>
+      <image_desktop_size type="int">150</image_desktop_size>
+      <image_mobile_size type="int">75</image_mobile_size>
       <id type="str">17</id>
     </field><field>
-      <label type="str">Cat&#233;gorie</label>
-      <type type="str">item</type>
+      <type>item</type>
+      <label type="str">Kategorie</label>
       <required type="bool">False</required>
-      <hint type="str">S&#233;lectionnez (optionnel)</hint>
+      <hint type="str">W&#228;hlen Sie aus (optional).</hint>
       <varname type="str">categorie</varname>
       <display_locations>
         <display_location>validation</display_location>
@@ -209,16 +197,18 @@
         <type>json</type>
         <value>{{ passerelle_url }}plone-restapi/actualites/get_field_choices?id=imio.news.vocabulary.NewsCategories</value>
       </data_source><in_filters type="bool">False</in_filters>
-      <anonymise type="bool">False</anonymise>
+      <anonymise type="str">no</anonymise>
       <display_disabled_items type="bool">False</display_disabled_items>
       <initial_zoom type="str">13</initial_zoom>
       <use_hint_as_first_option type="bool">True</use_hint_as_first_option>
+      <image_desktop_size type="int">150</image_desktop_size>
+      <image_mobile_size type="int">75</image_mobile_size>
       <id type="str">9</id>
     </field><field>
-      <label type="str">Public cible</label>
-      <type type="str">items</type>
+      <type>items</type>
+      <label type="str">Zielgruppe</label>
       <required type="bool">False</required>
-      <hint type="str">Cochez une ou plusieurs cibles pour cette actualit&#233; (optionnel).</hint>
+      <hint type="str">Markieren Sie eine oder mehrere Zielgruppen f&#252;r diese Nachricht (optional).</hint>
       <varname type="str">je_suis</varname>
       <display_locations>
         <display_location>validation</display_location>
@@ -231,12 +221,14 @@
         <type>json</type>
         <value>{{ passerelle_url }}plone-restapi/actualites/get_field_choices?id=imio.smartweb.vocabulary.IAm</value>
       </data_source><in_filters type="bool">False</in_filters>
-      <anonymise type="bool">True</anonymise>
+      <anonymise type="str">final</anonymise>
       <display_disabled_items type="bool">False</display_disabled_items>
+      <image_desktop_size type="int">150</image_desktop_size>
+      <image_mobile_size type="int">75</image_mobile_size>
       <id type="str">12</id>
     </field><field>
-      <label type="str">Exclure de la navigation</label>
-      <type type="str">bool</type>
+      <type>bool</type>
+      <label type="str">Von der Navigation ausschlie&#223;en</label>
       <condition>
         <type>django</type>
         <value>is_in_backoffice</value>
@@ -245,42 +237,42 @@
       <display_locations>
         <display_location>validation</display_location>
         <display_location>summary</display_location>
-      </display_locations><prefill>
-        <type>none</type>
-      </prefill><id type="str">15</id>
+      </display_locations><id type="str">15</id>
     </field><field>
-      <label type="str">Vos coordonn&#233;es</label>
-      <type type="str">page</type>
+      <type>page</type>
+      <label type="str">Ihre Kontaktdaten</label>
       <id type="str">19</id>
     </field><field>
-      <label type="str">Nom</label>
-      <type type="str">string</type>
+      <type>string</type>
+      <label type="str">Name</label>
       <required type="bool">False</required>
       <display_locations>
         <display_location>validation</display_location>
         <display_location>summary</display_location>
       </display_locations><extra_css_class type="str">grid-1-2</extra_css_class>
       <prefill>
+        <locked>False</locked>
         <type>user</type>
         <value>_last_name</value>
-      </prefill><anonymise type="bool">True</anonymise>
+      </prefill><anonymise type="str">final</anonymise>
       <id type="str">20</id>
     </field><field>
-      <label type="str">Pr&#233;nom</label>
-      <type type="str">string</type>
+      <type>string</type>
+      <label type="str">Vorname</label>
       <required type="bool">False</required>
       <display_locations>
         <display_location>validation</display_location>
         <display_location>summary</display_location>
       </display_locations><extra_css_class type="str">grid-1-2</extra_css_class>
       <prefill>
+        <locked>False</locked>
         <type>user</type>
         <value>_first_name</value>
-      </prefill><anonymise type="bool">True</anonymise>
+      </prefill><anonymise type="str">final</anonymise>
       <id type="str">21</id>
     </field><field>
-      <label type="str">Adresse e-mail</label>
-      <type type="str">email</type>
+      <type>email</type>
+      <label type="str">E-Mail-Adresse</label>
       <required type="bool">True</required>
       <varname type="str">mail</varname>
       <display_locations>
@@ -288,6 +280,7 @@
         <display_location>summary</display_location>
       </display_locations><extra_css_class type="str">grid-1-2</extra_css_class>
       <prefill>
+        <locked>False</locked>
         <type>user</type>
         <value>_email</value>
       </prefill><id type="str">22</id>
