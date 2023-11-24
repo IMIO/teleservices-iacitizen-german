@@ -11,20 +11,20 @@ class inst(install):
             os.getcwd().replace(" ", r"\ ").replace("(", r"\(").replace(")", r"\)")
             + "/bin/"
         )
-        os.system("sh " + path + "install_teleservices_iacitizen.sh")
+        os.system("sh " + path + "install_teleservices_iacitizen_german.sh")
 
 
 version = "0.0.1"
 
 setup(
-    name="teleservices-iacitizen",
+    name="teleservices-iacitizen-german",
     version=version,
-    author="Daniel Muyshond, Nicolas Selva, Nicolas Hislaire",
+    author="iMio",
     author_email="support-ts@imio.be",
     packages=find_packages(),
     include_package_data=True,
     install_requires=[],
-    url="https://github.com/IMIO//teleservices-iacitizen",
+    url="https://github.com/IMIO//teleservices-iacitizen-german",
     classifiers=[
         "Development Status :: 2 - Pre-Alpha",
         "Environment :: Web Environment",
