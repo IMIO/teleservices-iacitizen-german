@@ -1,18 +1,17 @@
 <?xml version="1.0"?>
-<mail-template id="56" url="https://staging-formulaires.guichet-citoyen.be/backoffice/workflows/mail-templates/56/">
-  <name>Information n&#233;cessaire</name>
-  <slug>information-necessaire</slug>
-  <subject>Information n&#233;cesssaire pour la demande {{ form_number }}</subject>
-  <body>Bonjour,
+<mail-template id="32" url="https://staging2-formulaires.guichet-citoyen.be/backoffice/workflows/mail-templates/32/">
+  <name>Informationsbedarf / information n&#233;cessaire</name>
+  <slug>informationsbedarf-information-necessaire</slug>
+  <subject>f&#252;r die Anfrage {{ form_number }}</subject>
+  <body>Hallo,
 
-Afin de traiter votre contribution, nous vous demandons l'information suivante :
+Zur Bearbeitung Ihres Beitrags bitten wir Sie um folgende Angaben:
 
 {{ comment_agent }}
 
+Sie k&#246;nnen antworten, indem Sie Ihre Anfrage &#252;ber den folgenden Link ausf&#252;llen.
 
-Vous pouvez r&#233;pondre en compl&#233;tant votre demande via le lien ci-dessous.
+`Anfrage ausf&#252;llen &lt;{{form_url}}&gt;`_
 
-`Compl&#233;ter ma demande &lt;{{form_url}}&gt;`_
-
-Bien &#224; vous,</body>
+Freundliche Gr&#252;&#223;e</body>
 </mail-template>
