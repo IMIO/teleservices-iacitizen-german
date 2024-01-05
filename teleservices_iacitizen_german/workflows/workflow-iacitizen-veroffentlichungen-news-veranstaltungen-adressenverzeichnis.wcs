@@ -1,32 +1,31 @@
 <?xml version="1.0"?>
-<workflow id="157" url="https://demo-formulaires.guichet-citoyen.be/backoffice/workflows/157/">
-  <name>iA.Citizen - Publications (actualit&#233;s, &#233;v&#233;nements, fiches annuaires)</name>
-  <slug>contributions</slug>
+<workflow id="60" url="https://staging2-formulaires.guichet-citoyen.be/backoffice/workflows/60/">
+  <name>iA.Citizen - Ver&#246;ffentlichungen (News, Veranstaltungen, Adressenverzeichnis)</name>
+  <slug>iacitizen-veroffentlichungen-news-veranstaltungen-adressenverzeichnis</slug>
   <roles>
     <role id="_editor">Destinataire</role>
     <role id="_testeur">Testeur</role>
   </roles><possible_status>
     <status>
       <id>recorded</id>
-      <name>En cours de validation</name>
-      <colour>FFFF99</colour>
+      <name>Im Validierungsprozess</name>
+      <colour>#FFFF99</colour>
       <visibility />
       <items>
         <item type="sendmail" id="1">
           <to>
             <item role_id="_submitter">_submitter</item>
-          </to><subject>Votre contribution ({{form_name}})</subject>
-          <body>Bonjour,
+          </to><subject>Ihr Beitrag ({{form_name}})</subject>
+          <body>Guten Tag,
 
-Nous avons bien re&#231;u votre contribution, elle sera relue avant d'&#234;tre publi&#233;e.
-Vous serez tenu&#183;e inform&#233;&#183;e quand la publication sera effective.
+Wir haben Ihren Beitrag erhalten, er wird vor der Ver&#246;ffentlichung &#252;berpr&#252;ft.
+Sie werden benachrichtigt, wenn die Ver&#246;ffentlichung erfolgt ist.
 
-R&#233;sum&#233; des informations envoy&#233;es :
+Zusammenfassung der gesendeten Informationen :
 
 {{form_details}}
 
-Bien &#224; vous,
-</body>
+Mit freundlichen Gr&#252;&#223;en,</body>
           <condition>
             <type>django</type>
             <value>form_var_previous_status != "Information n&#233;cessaire"</value>
@@ -34,63 +33,67 @@ Bien &#224; vous,
         </item><item type="sendmail" id="2">
           <to>
             <item role_id="_editor">_editor</item>
-          </to><subject>Nouvelle contribution ({{form_name}} - {{ form_number }})</subject>
-          <body>Bonjour,
+          </to><subject>Neuer Beitrag ({{form_name}} - {{ form_number }})</subject>
+          <body>Hallo,
 
-{% if form_previous_status == "Information n&#233;cessaire" %}
-Une nouvelle information a &#233;t&#233; apport&#233;e pour la demande {{ form_number }} :
+{% if form_previous_status == "Information erforderlich" %}
+F&#252;r die Anfrage {{ form_number }} wurde eine neue Information bereitgestellt:
 {{ form_url_backoffice }}
 
 {% else %}
-Une nouvelle contribution a &#233;t&#233; compl&#233;t&#233;e :
+Ein neuer Beitrag wurde vervollst&#228;ndigt :
 {{ form_url_backoffice }}
 {% endif %}
 
-Bien &#224; vous,</body>
+Mit freundlichen Gr&#252;&#223;en,</body>
         </item><item type="editable" id="3">
           <by>
             <item role_id="_editor">_editor</item>
           </by><status>recorded</status>
-          <label>Modifier</label>
+          <label>Bearbeiten</label>
+          <backoffice_info_text>&lt;p&gt;Bearbeiten Sie die Daten dieses Antrags.&lt;/p&gt;
+</backoffice_info_text>
           <operation_mode>full</operation_mode>
         </item><item type="commentable" id="4">
           <label>Commentaire</label>
-          <button_label>Publier le commentaire</button_label>
-          <hint>Le commentaire deviendra visible par l'usager, dans le fil ou historique de sa demande.</hint>
+          <button_label>Kommentar ver&#246;ffentlichen</button_label>
+          <hint>Der Kommentar wird f&#252;r den Nutzer in der Historie seiner Anfrage sichtbar.</hint>
           <by>
             <item role_id="_editor">_editor</item>
           </by><varname>agent</varname>
-          <backoffice_info_text>&lt;p&gt;Quand vous cliquez sur &amp;quot;Ajouter le commentaire&amp;quot;, le commentaire devient visible par l&amp;#39;usager, dans le fil ou historique de sa demande.&lt;/p&gt;
+          <backoffice_info_text>&lt;p&gt;&lt;span style="font-size: 17px; color: #000000; font-weight: normal; text-decoration: none; font-family: 'Arial'; font-style: normal;"&gt;Wenn Sie auf &amp;quot;Kommentar hinzuf&amp;uuml;gen&amp;quot; klicken, wird der Kommentar f&amp;uuml;r den Nutzer in der Workflow-Historie sichtbar.&lt;/span&gt;&lt;/p&gt;
 </backoffice_info_text>
           <required>False</required>
         </item><item type="choice" id="5">
-          <label>Envoyer une demande d'information</label>
+          <label>Eine Informationsanfrage senden</label>
           <by>
             <item role_id="_editor">_editor</item>
           </by><status>3</status>
           <require_confirmation>True</require_confirmation>
-          <backoffice_info_text>&lt;p&gt;Place cette demande sur le statut &amp;quot;Information n&amp;eacute;cessaire&amp;quot; qui d&amp;eacute;clenche l&amp;#39;envoi d&amp;#39;un courriel (voir mod&amp;egrave;le de courrier &amp;quot;Information n&amp;eacute;cessaire&amp;quot;). La personne est invit&amp;eacute;e &amp;agrave; commenter au bas de l&amp;#39;historique de la demande, un lien figure dans le mail et lui permet d&amp;#39;acc&amp;eacute;der &amp;agrave; ce formulaire afin d&amp;#39;alimenter le commentaire. Une fois le commentaire introduit, la demande revient sur le statut initial &amp;quot;En cours de validation&amp;quot; et le r&amp;ocirc;le Destinaire re&amp;ccedil;oit une notification.&lt;/p&gt;
+          <confirmation_text>Die Anfrage entwickelt sich zum Status "Information erforderlich".</confirmation_text>
+          <backoffice_info_text>&lt;p&gt;Setzt diese Anfrage auf den Status &amp;quot;Erforderliche Information&amp;quot;, der den Versand einer E-Mail ausl&amp;ouml;st (siehe Mailvorlage &amp;quot;Erforderliche Information&amp;quot;). Die Person wird aufgefordert, am Ende des Verlaufs der Anfrage einen Kommentar abzugeben. In der E-Mail befindet sich ein Link, &amp;uuml;ber den sie auf dieses Formular zugreifen kann, um den Kommentar zu erg&amp;auml;nzen. Sobald der Kommentar eingegeben wurde, wird der Antrag wieder auf den urspr&amp;uuml;nglichen Status &amp;quot;In Bearbeitung&amp;quot; gesetzt und der Empf&amp;auml;nger erh&amp;auml;lt eine Benachrichtigung.&lt;/p&gt;
 </backoffice_info_text>
           <ignore_form_errors>False</ignore_form_errors>
           <set_marker_on_status>False</set_marker_on_status>
         </item><item type="choice" id="6">
-          <label>Refuser et avertir du motif</label>
+          <label>Verweigern und Benachrichtigung</label>
           <by>
             <item role_id="_editor">_editor</item>
           </by><status>deleted</status>
           <require_confirmation>True</require_confirmation>
-          <backoffice_info_text>&lt;p&gt;&lt;strong&gt;Attention&lt;/strong&gt; : avant de refuser, vous devez imp&amp;eacute;rativement ajouter un commentaire motivant le refus afin que le courriel de refus soit agr&amp;eacute;ment&amp;eacute; de votre commentaire motivant le refus.&lt;/p&gt;
+          <confirmation_text>Achtung: Bevor sie ablehnen, m&#252;ssen Sie unbedingt einen Kommentar hinzuf&#252;gen, der die Ablehnung begr&#252;ndet, damit die Ablehnungs-E-Mail mit Ihrem Kommentar versehen wird.</confirmation_text>
+          <backoffice_info_text>&lt;p&gt;Achtung: Bevor sie ablehnen, m&amp;uuml;ssen Sie unbedingt einen Kommentar hinzuf&amp;uuml;gen, der die Ablehnung begr&amp;uuml;ndet, damit die Ablehnungs-E-Mail mit Ihrem Kommentar versehen wird.&lt;/p&gt;
 </backoffice_info_text>
           <ignore_form_errors>False</ignore_form_errors>
           <set_marker_on_status>False</set_marker_on_status>
         </item><item type="choice" id="7">
-          <label>Valider et publier cette contribution</label>
+          <label>Diesen Beitrag validieren und ver&#246;ffentlichen</label>
           <by>
             <item role_id="_editor">_editor</item>
-            <item slug="debug" role_id="08b4ba67eb2d421ea88d4bb0256a9666">Debug</item>
           </by><status>11</status>
           <require_confirmation>True</require_confirmation>
-          <backoffice_info_text>&lt;p&gt;La demande &amp;eacute;voluera vers un statut technique &amp;quot;Envoi vers le site web&amp;quot;, puis automatiquement le statut &amp;quot;Accept&amp;eacute; et publi&amp;eacute;&amp;quot;, une notification mail de confirmation sera transmise &amp;agrave; la personne.&lt;/p&gt;
+          <confirmation_text>Die Anfrage wird in den technischen Status "An Website senden" &#252;bergehen und dann automatisch den Status "akzeptiert und ver&#246;ffentlicht" erhalten, eine Best&#228;tigungs-E-Mail wird an die Person gesendet.</confirmation_text>
+          <backoffice_info_text>&lt;p&gt;Die Anfrage wird in den technischen Status &amp;quot;An Website senden&amp;quot; &amp;uuml;bergehen und dann automatisch den Status &amp;quot;akzeptiert und ver&amp;ouml;ffentlicht&amp;quot; erhalten, eine Best&amp;auml;tigungs-E-Mail wird an die Person gesendet.&lt;/p&gt;
 </backoffice_info_text>
           <ignore_form_errors>False</ignore_form_errors>
           <set_marker_on_status>False</set_marker_on_status>
@@ -98,66 +101,70 @@ Bien &#224; vous,</body>
       </items>
     </status><status>
       <id>deleted</id>
-      <name>Publication refus&#233;e</name>
-      <colour>996699</colour>
+      <name>Ver&#246;ffentlichung abgelehnt</name>
+      <colour>#FFFFFF</colour>
       <visibility />
       <items>
         <item type="sendmail" id="1">
           <to>
             <item role_id="_submitter">_submitter</item>
-          </to><subject>Publication refus&#233;e</subject>
-          <body>Bonjour,
+          </to><subject>Abgelehnte Ver&#246;ffentlichung</subject>
+          <body>Hallo,
 
-Nous vous informons que votre publication a &#233;t&#233; refus&#233;e pour la raison suivante :
+Wir informieren Sie, dass Ihre Ver&#246;ffentlichung aus folgendem Grund abgelehnt wurde:
 
 {{ comment_agent }}
 
-Bien à vous,</body>
+Freundliche Gr&#252;&#223;e</body>
         </item>
       </items>
     </status><status>
       <id>2</id>
-      <name>Accept&#233; et publi&#233;</name>
-      <colour>99FF99</colour>
+      <name>Akzeptiert und ver&#246;ffentlicht</name>
+      <colour>#99FF99</colour>
       <forced_endpoint>true</forced_endpoint>
       <visibility />
       <items>
         <item type="sendmail" id="1">
           <to>
             <item role_id="_submitter">_submitter</item>
-          </to><subject>Publication accept&#233;e</subject>
-          <body>Bonjour,
+          </to><subject>Ver&#246;ffentlichung angenommen</subject>
+          <body>Guten Morgen,
 
-Votre contribution a &#233;t&#233; publi&#233;e.
+Ihr Beitrag wurde ver&#246;ffentlicht.
 
-`Consulter ma demande &lt;{{form_url}}&gt;`_
+`Meine Anfrage ansehen &lt;{{form_url}}&gt;`_
 
-Bien à vous,</body>
+Mit freundlichen Gr&#252;&#223;en</body>
         </item><item type="editable" id="2">
           <by>
             <item role_id="_editor">_editor</item>
           </by><status>12</status>
-          <label>Modifier la contribution</label>
+          <label>Beitrag bearbeiten</label>
+          <backoffice_info_text>&lt;p&gt;Permet l&amp;#39;&amp;eacute;dition de cette demande. Les donn&amp;eacute;es sont ensuite transmises au site web.&lt;/p&gt;
+</backoffice_info_text>
           <operation_mode>full</operation_mode>
         </item>
       </items>
     </status><status>
       <id>3</id>
-      <name>Information n&#233;cessaire</name>
-      <colour>FF9966</colour>
+      <name>Notwendige Informationen</name>
+      <colour>#FF9966</colour>
       <visibility />
       <items>
         <item type="sendmail" id="1">
           <to>
             <item role_id="_submitter">_submitter</item>
-          </to><mail_template>information-necessaire</mail_template>
+          </to><mail_template>informationsbedarf-information-necessaire</mail_template>
         </item><item type="commentable" id="2">
           <label>Commentaire</label>
-          <button_label>Publier mon commentaire</button_label>
-          <hint>Le commentaire s'ajoutera &#224; ce fil et la personne traitant votre demande sera notifi&#233;e de cet ajout.</hint>
+          <button_label>meinen Kommentar ver&#246;ffentlichen</button_label>
+          <hint>Der Kommentar wird diesem Thread hinzugef&#252;gt und die Person, die Ihre Anfrage bearbeitet, wird &#252;ber diesen Zusatz benachrichtigt.</hint>
           <by>
             <item role_id="_submitter">_submitter</item>
           </by><varname>usager</varname>
+          <backoffice_info_text>&lt;p&gt;Der Kommentar wird diesem Thread hinzugef&amp;uuml;gt und die Person, die Ihre Anfrage bearbeitet, wird &amp;uuml;ber diesen Zusatz benachrichtigt.&lt;/p&gt;
+</backoffice_info_text>
           <required>False</required>
         </item><item type="jumponsubmit" id="3">
           <status>recorded</status>
@@ -166,8 +173,8 @@ Bien à vous,</body>
       </items>
     </status><status>
       <id>11</id>
-      <name>Envoi vers le site web</name>
-      <colour>FF9999</colour>
+      <name>An Website senden</name>
+      <colour>#FF9999</colour>
       <visibility />
       <items>
         <item type="jump" id="1">
@@ -192,8 +199,8 @@ Bien à vous,</body>
       </items>
     </status><status>
       <id>0</id>
-      <name>Envoi de l'&#233;venement vers le Plone "Agenda"</name>
-      <colour>999999</colour>
+      <name>Senden der Veranstaltung an die Plone &#8222;Veranstaltungskalender&#8220;</name>
+      <colour>#999999</colour>
       <visibility>
         <role>_editor</role>
         <role>_testeur</role>
@@ -262,7 +269,7 @@ Bien à vous,</body>
               <value>{{ form_var_tel_contact }}</value>
             </item><item>
               <name>end</name>
-              <value>{{ form_var_date_fin|date:"Y-m-d" }} {{ form_var_horaire_fin|default_if_none:"" }}</value>
+              <value>{{ form_var_date_fin|date:"Y-m-d" }} {{ form_var_horaire_fin|default:"23:59" }}</value>
             </item><item>
               <name>event_type</name>
               <value>{{ form_var_type_event_raw }}</value>
@@ -295,7 +302,7 @@ Bien à vous,</body>
               <value>{{ form_var_accessible }}</value>
             </item><item>
               <name>start</name>
-              <value>{{ form_var_date_debut|date:"Y-m-d" }} {{ form_var_horaire_debut|default_if_none:"" }}</value>
+              <value>{{ form_var_date_debut|date:"Y-m-d" }} {{ form_var_horaire_debut|default:"00:00" }}</value>
             </item><item>
               <name>street</name>
               <value>{{ form_var_rue }}</value>
@@ -328,6 +335,7 @@ Bien à vous,</body>
           <notify_on_errors>False</notify_on_errors>
           <record_on_errors>True</record_on_errors>
           <record_errors>True</record_errors>
+          <set_marker_on_status>False</set_marker_on_status>
         </item><item type="jump" id="2">
           <status>2</status>
           <set_marker_on_status>False</set_marker_on_status>
@@ -335,8 +343,8 @@ Bien à vous,</body>
       </items>
     </status><status>
       <id>6</id>
-      <name>Envoi de l'actualit&#233; vers le Plone "Actualit&#233;s"</name>
-      <colour>999999</colour>
+      <name>Senden von Nachrichten an die Plone &#8222;News&#8220;</name>
+      <colour>#999999</colour>
       <visibility>
         <role>_editor</role>
         <role>_testeur</role>
@@ -411,6 +419,7 @@ Bien à vous,</body>
           <notify_on_errors>False</notify_on_errors>
           <record_on_errors>True</record_on_errors>
           <record_errors>True</record_errors>
+          <set_marker_on_status>False</set_marker_on_status>
         </item><item type="jump" id="2">
           <status>2</status>
           <set_marker_on_status>False</set_marker_on_status>
@@ -418,8 +427,8 @@ Bien à vous,</body>
       </items>
     </status><status>
       <id>7</id>
-      <name>Envoi du contact vers le Plone "Annuaire"</name>
-      <colour>999999</colour>
+      <name>Senden des Kontakts an das Plone-&#8222;Adressenverzeichnis&#8220;</name>
+      <colour>#999999</colour>
       <visibility>
         <role>_editor</role>
         <role>_testeur</role>
@@ -635,6 +644,7 @@ Bien à vous,</body>
           <notify_on_errors>False</notify_on_errors>
           <record_on_errors>True</record_on_errors>
           <record_errors>True</record_errors>
+          <set_marker_on_status>False</set_marker_on_status>
         </item><item type="jump" id="2">
           <status>2</status>
           <set_marker_on_status>False</set_marker_on_status>
@@ -642,36 +652,33 @@ Bien à vous,</body>
       </items>
     </status><status>
       <id>1</id>
-      <name>Erreur technique lors de l'envoi vers le Plone</name>
-      <colour>FF6666</colour>
+      <name>Technischer Fehler beim Senden an Plone</name>
+      <colour>#FF6666</colour>
       <visibility>
         <role>_editor</role>
         <role>_testeur</role>
       </visibility><items>
         <item type="displaymsg" id="1">
-          <message>&lt;p&gt;Information technique pour l&#8217;analyse de l&#8217;erreur&#160;:&lt;/p&gt;
+          <message>&lt;p&gt;Technische Informationen zur Fehleranalyse:&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;date&#183;heure&#160;: {{form_workflow_data_envoi_time}}&lt;/li&gt;
-&lt;li&gt;statut envoi&#160;: {{form_workflow_data_envoi_status}}&lt;/li&gt;
-&lt;li&gt;classe d&#8217;erreur : {{form_workflow_data_envoi_error_response_err_class}}&lt;/li&gt;
-&lt;li&gt;description de l&#8217;erreur : {{form_workflow_data_envoi_error_response_err_desc}}&lt;/li&gt;
+&lt;li&gt;Datum-Zeit: {{form_workflow_data_send_time}}&lt;/li&gt;
+&lt;li&gt;Versandstatus: {{form_workflow_data_send_status}}&lt;/li&gt;
+&lt;li&gt;Fehlerklasse: {{form_workflow_data_mail_error_response_err_class}}&lt;/li&gt;
+&lt;li&gt;Fehlerbeschreibung: {{form_workflow_data_mail_error_response_err_desc}}&lt;/li&gt;
 &lt;/ul&gt;</message>
           <level>info</level>
           <position>top</position>
           <to>
             <item role_id="_editor">_editor</item>
-            <item slug="agent-ayant-acces-aux-fabriques" role_id="032bfed279a448d39a09dedadbc09a31">Agent ayant acces aux fabriques</item>
-            <item slug="debug" role_id="08b4ba67eb2d421ea88d4bb0256a9666">Debug</item>
           </to>
         </item><item type="choice" id="2">
-          <label>&#128257; Rejouer l'envoi vers le site web</label>
+          <label>&#128257; Erneutes Senden an die Website</label>
           <by>
             <item role_id="_editor">_editor</item>
-            <item slug="debug" role_id="08b4ba67eb2d421ea88d4bb0256a9666">Debug</item>
           </by><status>11</status>
           <require_confirmation>True</require_confirmation>
-          <backoffice_info_text>&lt;p&gt;En cas d&amp;#39;erreur technique, il est parfois opportun de rejouer l&amp;#39;envoi vers le site web. En cas de persistance d&amp;#39;un probl&amp;egrave;me, contactez le support iMio pour obtenir de l&amp;#39;assistance.&lt;/p&gt;
+          <backoffice_info_text>&lt;p&gt;Im Falle eines technischen Fehlers ist es manchmal ratsam, die Sendung an die Website erneut vorzunehmen. Wenn ein Problem weiterhin besteht, wenden Sie sich an den iMio-Support, um Unterst&amp;uuml;tzung zu erhalten.&lt;/p&gt;
 </backoffice_info_text>
           <ignore_form_errors>False</ignore_form_errors>
           <set_marker_on_status>False</set_marker_on_status>
@@ -679,8 +686,8 @@ Bien à vous,</body>
       </items>
     </status><status>
       <id>12</id>
-      <name>Modification de la contribution</name>
-      <colour>999999</colour>
+      <name>Beitrags&#228;nderung</name>
+      <colour>#999999</colour>
       <visibility>
         <role>_editor</role>
         <role>_testeur</role>
@@ -707,8 +714,8 @@ Bien à vous,</body>
       </items>
     </status><status>
       <id>8</id>
-      <name>Modification de l'&#233;venement dans le Plone "Agenda"</name>
-      <colour>999999</colour>
+      <name>&#196;nderung der Veranstaltung im Plone &#8222;Veranstaltungskalender&#8220;</name>
+      <colour>#999999</colour>
       <visibility>
         <role>_editor</role>
         <role>_testeur</role>
@@ -777,7 +784,7 @@ Bien à vous,</body>
               <value>{{ form_var_tel_contact }}</value>
             </item><item>
               <name>end</name>
-              <value>{{ form_var_date_fin|date:"Y-m-d" }} {{ form_var_horaire_fin }}</value>
+              <value>{{ form_var_date_fin|date:"Y-m-d" }} {{ form_var_horaire_fin|default:"23:59" }}</value>
             </item><item>
               <name>event_type</name>
               <value>{{ form_var_type_event_raw }}</value>
@@ -810,7 +817,7 @@ Bien à vous,</body>
               <value>{{ form_var_accessible }}</value>
             </item><item>
               <name>start</name>
-              <value>{{ form_var_date_debut|date:"Y-m-d" }} {{ form_var_horaire_debut }}</value>
+              <value>{{ form_var_date_debut|date:"Y-m-d" }} {{ form_var_horaire_debut|default:"00:00" }}</value>
             </item><item>
               <name>street</name>
               <value>{{ form_var_rue }}</value>
@@ -843,6 +850,7 @@ Bien à vous,</body>
           <notify_on_errors>False</notify_on_errors>
           <record_on_errors>True</record_on_errors>
           <record_errors>True</record_errors>
+          <set_marker_on_status>False</set_marker_on_status>
         </item><item type="jump" id="2">
           <status>2</status>
           <set_marker_on_status>False</set_marker_on_status>
@@ -850,8 +858,8 @@ Bien à vous,</body>
       </items>
     </status><status>
       <id>9</id>
-      <name>Modification de l'actualit&#233; dans le Plone "Actualit&#233;s"</name>
-      <colour>999999</colour>
+      <name>Modifikation der News in den Plone &#8222;News&#8220;</name>
+      <colour>#999999</colour>
       <visibility>
         <role>_editor</role>
         <role>_testeur</role>
@@ -926,6 +934,7 @@ Bien à vous,</body>
           <notify_on_errors>False</notify_on_errors>
           <record_on_errors>True</record_on_errors>
           <record_errors>True</record_errors>
+          <set_marker_on_status>False</set_marker_on_status>
         </item><item type="jump" id="2">
           <status>2</status>
           <set_marker_on_status>False</set_marker_on_status>
@@ -933,8 +942,8 @@ Bien à vous,</body>
       </items>
     </status><status>
       <id>10</id>
-      <name>Modification du contact dans le Plone "Annuaire"</name>
-      <colour>999999</colour>
+      <name>Bearbeiten des Kontakts im Plone &#8222;Adressenverzeichnis&#8220;</name>
+      <colour>#999999</colour>
       <visibility>
         <role>_editor</role>
         <role>_testeur</role>
@@ -1150,6 +1159,7 @@ Bien à vous,</body>
           <notify_on_errors>False</notify_on_errors>
           <record_on_errors>True</record_on_errors>
           <record_errors>True</record_errors>
+          <set_marker_on_status>False</set_marker_on_status>
         </item><item type="jump" id="2">
           <status>2</status>
           <set_marker_on_status>False</set_marker_on_status>
@@ -1157,15 +1167,15 @@ Bien à vous,</body>
       </items>
     </status><status>
       <id>5</id>
-      <name>Erreur lors de la modification</name>
-      <colour>FF6666</colour>
+      <name>Fehler beim &#196;ndern</name>
+      <colour>#FF6666</colour>
       <visibility />
       <items>
         <item type="choice" id="1">
           <label>&#128257; Rejouer l'envoi de la modification</label>
           <by>
             <item role_id="_editor">_editor</item>
-            <item slug="debug" role_id="08b4ba67eb2d421ea88d4bb0256a9666">Debug</item>
+            <item slug="debug" role_id="6d2c55fe2ea44e41b7f8111b93f1930a">Debug</item>
           </by><status>12</status>
           <require_confirmation>True</require_confirmation>
           <backoffice_info_text>&lt;p&gt;En cas d&amp;#39;erreur technique, il est parfois opportun de rejouer l&amp;#39;envoi vers le site web. En cas de persistance d&amp;#39;un probl&amp;egrave;me, contactez le support iMio pour obtenir de l&amp;#39;assistance.&lt;/p&gt;
@@ -1173,27 +1183,25 @@ Bien à vous,</body>
           <ignore_form_errors>False</ignore_form_errors>
           <set_marker_on_status>False</set_marker_on_status>
         </item><item type="displaymsg" id="2">
-          <message>&lt;p&gt;Information technique pour l&#8217;analyse de l&#8217;erreur :&lt;/p&gt;
+          <message>&lt;p&gt;Technische Informationen zur Fehleranalyse:&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;date&#183;heure : {{form_workflow_data_modification_time}}&lt;/li&gt;
-&lt;li&gt;statut modification : {{form_workflow_data_modification_status}}&lt;/li&gt;
-&lt;li&gt;classe d&#8217;erreur : {{form_workflow_data_modification_error_response_err_class}}&lt;/li&gt;
-&lt;li&gt;description de l&#8217;erreur : {{form_workflow_data_modification_error_response_err_desc}}&lt;/li&gt;
+&lt;li&gt;Datum-Uhrzeit: {{form_workflow_data_modification_time}}&lt;/li&gt;
+&lt;li&gt;&#196;nderungsstatus: {{form_workflow_data_modification_status}}&lt;/li&gt;
+&lt;li&gt;Fehlerklasse: {{form_workflow_data_modification_error_response_err_class}}&lt;/li&gt;
+&lt;li&gt;Fehlerbeschreibung: {{form_workflow_data_modification_error_response_err_desc}&lt;/li&gt;
 &lt;/ul&gt;</message>
           <level>info</level>
           <position>top</position>
           <to>
             <item role_id="_editor">_editor</item>
-            <item slug="agent-ayant-acces-aux-fabriques" role_id="032bfed279a448d39a09dedadbc09a31">Agent ayant acces aux fabriques</item>
-            <item slug="debug" role_id="08b4ba67eb2d421ea88d4bb0256a9666">Debug</item>
           </to>
         </item>
       </items>
     </status><status>
       <id>13</id>
-      <name>Modification publi&#233;e</name>
-      <colour>99FF99</colour>
+      <name>&#196;nderung ver&#246;ffentlicht</name>
+      <colour>#99FF99</colour>
       <visibility>
         <role>_editor</role>
         <role>_testeur</role>
@@ -1209,7 +1217,8 @@ Bien à vous,</body>
         <trigger type="manual" id="341b3a4e-3ada-496a-924b-7793907f749f">
           <roles>
             <item role_id="_editor">_editor</item>
-          </roles>
+          </roles><allow_as_mass_action>True</allow_as_mass_action>
+          <require_confirmation>False</require_confirmation>
         </trigger>
       </triggers>
     </action>
@@ -1218,27 +1227,30 @@ Bien à vous,</body>
       <name>-</name>
       <fields>
         <field>
+          <type>item</type>
           <label type="str">Type de contribution</label>
-          <type type="str">item</type>
           <required type="bool">True</required>
           <varname type="str">type</varname>
           <display_locations />
+          <anonymise type="bool">False</anonymise>
           <display_mode type="str">list</display_mode>
           <items>
             <item>Actualit&#233;</item>
             <item>Annuaire</item>
             <item>&#201;v&#233;nement</item>
           </items><in_filters type="bool">False</in_filters>
-          <anonymise type="bool">False</anonymise>
           <display_disabled_items type="bool">False</display_disabled_items>
+          <use_hint_as_first_option type="bool">True</use_hint_as_first_option>
+          <image_desktop_size type="int">150</image_desktop_size>
+          <image_mobile_size type="int">75</image_mobile_size>
           <id type="str">1</id>
         </field><field>
+          <type>string</type>
           <label type="str">Sous dossier des contenus Plone</label>
-          <type type="str">string</type>
           <required type="bool">True</required>
           <varname type="str">plone_folder</varname>
           <display_locations />
-          <anonymise type="bool">False</anonymise>
+          <anonymise type="str">no</anonymise>
           <id type="str">3</id>
         </field>
       </fields>
