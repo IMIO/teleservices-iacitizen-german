@@ -1,4 +1,6 @@
-# iA.Citizen init. package
+# teleservices-iacitizen-german 
+
+Fork traduit pour la communauté germanophone.
 
 ## Points d'attention lors d'une instanciation
 
