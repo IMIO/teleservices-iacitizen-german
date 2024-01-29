@@ -1,3 +1,3 @@
-recursive-include teleservices_iacitizen *
+global-include *.wcs *.sh
 include MANIFEST.in
 include VERSION
